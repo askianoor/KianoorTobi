@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KianoorTobi.API", "src\KianoorTobi.API\KianoorTobi.API.csproj", "{EF04AF51-7754-4E80-B9B6-3DDD7983CAE4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KianoorTobi.Domain", "src\KianoorTobi.Domain\KianoorTobi.Domain.csproj", "{D70034B2-F6E3-4F79-86F0-A5985ADADCF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KianoorTobi.Infrastructure", "src\KianoorTobi.Infrastructure\KianoorTobi.Infrastructure.csproj", "{FA51E672-A088-4ED5-B7A5-8803E93CFDD3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{9EFCCA72-DF6A-43D9-ACB8-D63CD00285E3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EF04AF51-7754-4E80-B9B6-3DDD7983CAE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF04AF51-7754-4E80-B9B6-3DDD7983CAE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF04AF51-7754-4E80-B9B6-3DDD7983CAE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF04AF51-7754-4E80-B9B6-3DDD7983CAE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D70034B2-F6E3-4F79-86F0-A5985ADADCF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D70034B2-F6E3-4F79-86F0-A5985ADADCF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D70034B2-F6E3-4F79-86F0-A5985ADADCF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D70034B2-F6E3-4F79-86F0-A5985ADADCF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA51E672-A088-4ED5-B7A5-8803E93CFDD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA51E672-A088-4ED5-B7A5-8803E93CFDD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA51E672-A088-4ED5-B7A5-8803E93CFDD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA51E672-A088-4ED5-B7A5-8803E93CFDD3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DBB6C09D-02C5-48DE-A32F-374027C0A049}
+	EndGlobalSection
+EndGlobal
