@@ -59,12 +59,12 @@ namespace KianoorTobi.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(ProductAddDto productDto)
         {
-            if (!ModelState.IsValid) return BadRequest();
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
             var product = _mapper.Map<Product>(productDto);
             var productResult = await _productService.Add(product);
 
-            if (productResult == null) return BadRequest();
+            if (productResult == null) return BadRequest(ModelState);
 
             return Ok(_mapper.Map<ProductOutputDto>(productResult));
         }
@@ -72,9 +72,9 @@ namespace KianoorTobi.API.Controllers
         [HttpPut("{id:long}")]
         public async Task<IActionResult> Update(long id, ProductEditDto productDto)
         {
-            if (id != productDto.Id) return BadRequest();
+            if (id != productDto.Id) return BadRequest(ModelState);
 
-            if (!ModelState.IsValid) return BadRequest();
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
             await _productService.Update(_mapper.Map<Product>(productDto));
 
