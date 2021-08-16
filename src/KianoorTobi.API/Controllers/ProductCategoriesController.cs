@@ -37,59 +37,57 @@ namespace KianoorTobi.API.Controllers
         [HttpGet("{id:long}")]
         public async Task<IActionResult> GetById(long id)
         {
-            var category = await _productCategoryService.GetById(id);
+            var productCategory = await _productCategoryService.GetById(id);
 
-            if (category == null) return NotFound();
+            if (productCategory == null) return NotFound();
 
-            return Ok(_mapper.Map<ProductCategoryOutputDto>(category));
+            return Ok(_mapper.Map<ProductCategoryOutputDto>(productCategory));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(ProductCategoryAddDto categoryDto)
+        public async Task<IActionResult> Add(ProductCategoryAddDto productCategoryDto)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            var category = _mapper.Map<ProductCategory>(categoryDto);
-            var categoryResult = await _productCategoryService.Add(category);
+            var productCategory = _mapper.Map<ProductCategory>(productCategoryDto);
+            var productCategoryResult = await _productCategoryService.Add(productCategory);
 
-            if (categoryResult == null) return BadRequest(ModelState);
+            if (productCategoryResult == null) return BadRequest(ModelState);
 
-            return Ok(_mapper.Map<ProductCategoryOutputDto>(categoryResult));
+            return Ok(_mapper.Map<ProductCategoryOutputDto>(productCategoryResult));
         }
 
-        [HttpPut("{id:long}")]
-        public async Task<IActionResult> Update(long id, ProductCategoryEditDto categoryDto)
+        [HttpPut]
+        public async Task<IActionResult> Update(ProductCategoryEditDto productCategoryDto)
         {
-            if (id != categoryDto.Id) return BadRequest(ModelState);
-
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            await _productCategoryService.Update(_mapper.Map<ProductCategory>(categoryDto));
+            await _productCategoryService.Update(_mapper.Map<ProductCategory>(productCategoryDto));
 
-            return Ok(categoryDto);
+            return Ok(productCategoryDto);
         }
 
         [HttpDelete("{id:long}")]
         public async Task<IActionResult> Remove(long id)
         {
-            var category = await _productCategoryService.GetById(id);
-            if (category == null) return NotFound();
+            var productCategory = await _productCategoryService.GetById(id);
+            if (productCategory == null) return NotFound();
 
-            var result = await _productCategoryService.Remove(category);
+            var result = await _productCategoryService.Remove(productCategory);
 
             if (!result) return BadRequest();
 
             return Ok();
         }
 
-        [Route("search/{category}")]
+        [Route("search/{productCategory}")]
         [HttpGet]
-        public async Task<ActionResult<List<ProductCategory>>> Search(string category)
+        public async Task<ActionResult<List<ProductCategory>>> Search(string productCategory)
         {
-            var categories = _mapper.Map<List<ProductCategory>>(await _productCategoryService.Search(category));
+            var categories = _mapper.Map<List<ProductCategory>>(await _productCategoryService.Search(productCategory));
 
             if (categories == null || categories.Count == 0)
-                return NotFound("None product category was founded");
+                return NotFound("None product productCategory was founded");
 
             return Ok(categories);
         }

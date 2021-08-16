@@ -69,11 +69,9 @@ namespace KianoorTobi.API.Controllers
             return Ok(_mapper.Map<ProductOutputDto>(productResult));
         }
 
-        [HttpPut("{id:long}")]
-        public async Task<IActionResult> Update(long id, ProductEditDto productDto)
+        [HttpPut]
+        public async Task<IActionResult> Update(ProductEditDto productDto)
         {
-            if (id != productDto.Id) return BadRequest(ModelState);
-
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
             await _productService.Update(_mapper.Map<Product>(productDto));
