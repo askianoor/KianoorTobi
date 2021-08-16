@@ -1,7 +1,4 @@
-﻿using KianoorTobi.Domain.Models;
-using System.ComponentModel.DataAnnotations;
-using FluentValidation;
-using KianoorTobi.Domain.Enums;
+﻿using KianoorTobi.Domain.Enums;
 
 namespace KianoorTobi.API.Dtos.Product
 {
@@ -13,7 +10,6 @@ namespace KianoorTobi.API.Dtos.Product
 
         public ProductType Type { get; set; }
 
-        [Required(ErrorMessage = "The field {0} is required")]
         public long ProductCategoryId { get; set; }
     }
 }
