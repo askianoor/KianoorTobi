@@ -1,0 +1,15 @@
+<h2>
+  Products
+</h2>
+
+<tobi-table
+[hasAddButton]="true"
+[hasPaging]="hasPaging"
+[headers]='headers'
+[source]='source'
+[(pageNumber)]='pageNumber'
+(onAdd)="onAdd()"
+(onEdit)="onEdit($event)"
+(onDelete)="onDelete($event)"
+>
+</tobi-table>

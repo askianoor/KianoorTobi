@@ -3,14 +3,29 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ServiceProxyModule } from './shared/services/service-proxy.module';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { NgxLoadingXModule } from 'ngx-loading-x';
+import { AppConsts } from './shared/AppConsts';
+import { TobiTableModule } from './shared/components/tobi-table/tobi-table.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule,
+    HttpClientModule,
+    ServiceProxyModule,
+    NgxLoadingXModule.forRoot(AppConsts.ngxLoadingXConfig),
+  ],
+  exports: [
+    NavbarComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

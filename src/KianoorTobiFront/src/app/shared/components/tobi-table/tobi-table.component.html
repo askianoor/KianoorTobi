@@ -1,0 +1,38 @@
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th *ngFor="let headItem of headers" scope="col">{{headItem.headerName}}</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let element of source">
+    <td *ngFor="let headField of headers">
+      {{element[headField.field]}}
+    </td>
+    <ng-container *ngIf="!viewOnly">
+      <td>
+      <button id="EditBtn" type="button" class="edit-btn" *ngIf="hasEditButton"
+              (click)="selectedRow=element; selectedRowChange.emit(selectedRow); onEdit.emit(selectedRow);">
+        <span>{{'Edit'}}</span>
+      </button>
+    </td>
+    <td>
+      <button id="RejectBtn" type="button" class="delete-btn" *ngIf="hasDeleteButton"
+              (click)="selectedRow=element; selectedRowChange.emit(selectedRow); onDelete.emit(selectedRow);">
+        <span>{{'Delete'}}</span>
+      </button>
+    </td>
+  </ng-container>
+  </tr>
+  </tbody>
+</table>
+
+<div *ngIf="hasPaging" class="d-flex justify-content-between p-2">
+  <ngb-pagination
+    [collectionSize]="totalItems" [(page)]="pageNumber" [pageSize]="pageSize">
+  </ngb-pagination>
+
+  <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="pageSize">
+    <option *ngFor="let page of pageSizeOptions" [value]="page">{{page}} items per page</option>
+  </select>
+</div>
