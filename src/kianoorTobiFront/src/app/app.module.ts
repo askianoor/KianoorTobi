@@ -7,8 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ServiceProxyModule } from './shared/services/service-proxy.module';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { NgxLoadingXModule } from 'ngx-loading-x';
-import { AppConsts } from './shared/AppConsts';
-import { TobiTableModule } from './shared/components/tobi-table/tobi-table.module';
+import { AppConsts } from './shared/app-consts';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
