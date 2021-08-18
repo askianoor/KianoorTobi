@@ -10,7 +10,9 @@ export class NgxLoadingService {
   public loadingObservable = this.loadingSub.asObservable();
 
   setLoading(loading: boolean): void {
-    this.loadingSub.next(loading);
+    setTimeout(() => {
+      this.loadingSub.next(loading);
+    }, 500);
   }
 
   constructor() { }

@@ -11,6 +11,7 @@ export class TobiTableComponent {
   @Input() source: any = [];
   @Input() selectedRow: any = {};
 
+  @Input() isTableLoading = true;
   @Input() viewOnly = false;
   @Input() hasPaging = true;
   @Input() pageNumber = 1;
@@ -40,7 +41,6 @@ export class TobiTableColumn {
   rowspan?: number = 1;
   cellRenderer?: (rowData: any, cell: any) => {};
 }
-
 
 @Directive({
   selector: '[TobiTableCellRenderer]'

@@ -1,3 +1,16 @@
-<p>
-  admin-product-category works!
-</p>
+<h2>
+  Product Categories
+</h2>
+
+<tobi-table
+[hasAddButton]="true"
+[hasPaging]="hasPaging"
+[headers]='headers'
+[source]='source'
+[(pageNumber)]='pageNumber'
+(onAdd)="onAdd()"
+(onEdit)="onEdit($event)"
+(onDelete)="onDelete($event)"
+[isTableLoading]='isTableLoading'
+>
+</tobi-table>

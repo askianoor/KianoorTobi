@@ -1,33 +1,43 @@
-<table class="table table-borderless tobi-table">
-  <thead>
-  <tr>
-    <th *ngFor="let headItem of headers" scope="col">{{headItem.headerName}}</th>
-    <ng-container *ngIf="!viewOnly">
-      <th *ngIf="hasEditButton"></th>
-      <th *ngIf="hasDeleteButton"></th>
+<div *ngIf="isTableLoading" class="table-loading">
+</div>
+<div *ngIf="!isTableLoading">
+  <table class="table table-borderless tobi-table">
+    <thead>
+    <tr>
+      <th *ngFor="let headItem of headers" scope="col">{{headItem.headerName}}</th>
+      <ng-container *ngIf="!viewOnly">
+        <th *ngIf="hasEditButton"></th>
+        <th *ngIf="hasDeleteButton"></th>
+    </ng-container>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let element of source">
+      <td *ngFor="let headField of headers">
+        <ng-container>
+          <div TobiTableCellRenderer [rowData]='element' [colData]='headField'></div>
+        </ng-container>
+      </td>
+      <ng-container *ngTemplateOutlet="actionRef, context: {$implicit: element}"></ng-container>
+    </tr>
+    </tbody>
+  </table>
+
+  <ng-container *ngIf="hasAddButton">
+      <button id="AddBtn" type="button" class="tobi-btn add-btn" (click)="onAdd.emit();">
+        <span>{{'Add'}}</span>
+      </button>
   </ng-container>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let element of source">
-    <td *ngFor="let headField of headers">
-      <ng-container>
-        <div TobiTableCellRenderer [rowData]='element' [colData]='headField'></div>
-      </ng-container>
-    </td>
-    <ng-container *ngTemplateOutlet="actionRef, context: {$implicit: element}"></ng-container>
-  </tr>
-  </tbody>
-</table>
 
-<div *ngIf="hasPaging" class="d-flex justify-content-between p-2">
-  <ngb-pagination
-    [collectionSize]="totalItems" [(page)]="pageNumber" [pageSize]="pageSize">
-  </ngb-pagination>
+  <div *ngIf="hasPaging" class="d-flex justify-content-between p-2">
+    <ngb-pagination
+      [collectionSize]="totalItems" [(page)]="pageNumber" [pageSize]="pageSize">
+    </ngb-pagination>
 
-  <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="pageSize">
-    <option *ngFor="let page of pageSizeOptions" [value]="page">{{page}} items per page</option>
-  </select>
+    <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="pageSize">
+      <option *ngFor="let page of pageSizeOptions" [value]="page">{{page}} items per page</option>
+    </select>
+  </div>
 </div>
 
 <ng-template #actionRef let-element>

@@ -5,11 +5,10 @@
   --main-color: #17103E;
   --main-btn-text-color: #fff;
   --main-btn-bg-color: #18B876;
-  // --main-bg: #eef2f4 url('/assets/images/pattern-grey.svg') 0 0 repeat !important;
+  --main-bg-loading: #eef2f4 url('./assets/Icons/Icons_Loading.svg') 50% 50% no-repeat !important;
 }
 
 * {
-  font-size: 22px;
   box-sizing: border-box;
   text-align: left;
   font-family: Helvetica, Arial,  sans-serif; //"Helvetica Neue" is not rendering well !
@@ -20,6 +19,7 @@
 
 nav {
   background-color: var(--main-color) !important;
+  font-size: 22px;
 
   a {
     color: #fff;
@@ -32,7 +32,6 @@ nav {
   left: 10px;
   width: 175px;
   height: 30px;
-  // background: transparent url('./assets/Logo/Tobii_Dynavox_Logo_White.png') 0% 0% no-repeat padding-box;
 }
 
 .tobi-btn {
@@ -41,6 +40,7 @@ nav {
   align-items: center;
   border: 3px solid var(--main-color) !important;
   border-radius: 5px;
+  font-size: 22px;
   width: 114px;
   height: 70px;
   background-color: var(--main-btn-bg-color);
@@ -49,25 +49,41 @@ nav {
     color: var(--main-btn-text-color);
     font-weight: bold;
   }
+
+  > span:after {
+    content: "";
+    background-size: 20px 20px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+  }
+}
+
+.add-btn  {
+  width: 228px;
+
+  > span:after {
+    content: "+";
+  }
 }
 
 .edit-btn > span:after {
-  content: "";
   background-image: url('./assets/Icons/Icons_Edit.svg');
-  background-size: 20px 20px;
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  margin-left: 10px;
 }
 
 .delete-btn > span:after {
-  content: "";
   background-image: url('./assets/Icons/Icons_Delete.svg');
-  background-size: 20px 20px;
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  margin-left: 10px;
 }
 
+.cancel-btn {
+  background-color: #F8FBFA;
+  color: var(--main-color);
+  background-image: url('./assets/Icons/Icons_Cancel.svg');
+  fill: var(--main-color);
+}
+
+
+.swal2-actions {
+  justify-content: space-around !important;
+}

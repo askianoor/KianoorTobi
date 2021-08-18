@@ -1,4 +1,6 @@
-import { Directive, OnInit } from "@angular/core";
+import { Directive, Injector, OnInit } from "@angular/core";
+import { ComponentBase } from "./component-base";
+import { NgxLoadingService } from "./services/ngx-loading.service";
 
 export class PagedResultDto {
   items!: any[];
@@ -15,7 +17,7 @@ export class PagedRequestDto {
 }
 
 @Directive({})
-export abstract class TableComponentBase<TEntityDto> implements OnInit {
+export abstract class TableComponentBase<TEntityDto> extends ComponentBase implements OnInit {
 
   hasPaging = true;
   public abstract headers: any[] = [];
@@ -31,6 +33,11 @@ export abstract class TableComponentBase<TEntityDto> implements OnInit {
   public keyword = '';
   public source: TEntityDto[] = [];
   skipCount = 0;
+
+  // constructor(private loadingService: NgxLoadingService) {
+  constructor(injector: Injector) {
+    super(injector);
+  }
 
   ngOnInit() {
     this.refresh();
@@ -55,6 +62,7 @@ export abstract class TableComponentBase<TEntityDto> implements OnInit {
       this.skipCount = (this.pageNumber - 1) * this.pageSize;
     }
     this.isTableLoading = true;
+    // this.loadingService.setLoading(true);
     try {
       this.list((result: any) => {
         if (result) {
@@ -66,13 +74,16 @@ export abstract class TableComponentBase<TEntityDto> implements OnInit {
               this.source = result;
             }
             this.isTableLoading = false;
+            // this.loadingService.setLoading(false);
           }, 500);
         } else {
           this.isTableLoading = false;
+          // this.loadingService.setLoading(false);
         }
       });
     } catch (err) {
       this.isTableLoading = false;
+      // this.loadingService.setLoading(false);
     }
   }
 

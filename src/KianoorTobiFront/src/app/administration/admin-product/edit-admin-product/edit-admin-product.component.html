@@ -1,0 +1,15 @@
+<tobi-form
+  #tobiForm="tobiForm"
+  [isNew]="!id" [saving]="saving" [loading]="loading"
+  [editText]="'Edit Product'"
+  [newText]="'Create Product'" (onSave)="onSave()">
+
+  <div>
+    <ng-container *ngIf="!id">
+      {{id}}
+    </ng-container>
+  </div>
+
+</tobi-form>
+
+teststste

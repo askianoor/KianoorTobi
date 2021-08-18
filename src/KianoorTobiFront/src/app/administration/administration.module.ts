@@ -5,20 +5,23 @@ import { AdminProductComponent } from './admin-product/admin-product.component';
 import { AdminProductCategoryComponent } from './admin-product-category/admin-product-category.component';
 import { AdministrationRoutingModule } from './administration-routing.module';
 import { TobiTableModule } from '../shared/components/tobi-table/tobi-table.module';
-import { MoneyPipe } from '../shared/pipes/money.pipe';
 import { SharedModule } from '../shared/shared.module';
+import { TobiFormModule } from '../shared/components/tobi-form/tobi-form.module';
+import { EditAdminProductComponent } from './admin-product/edit-admin-product/edit-admin-product.component';
 
 @NgModule({
   imports: [
     CommonModule,
     AdministrationRoutingModule,
+    SharedModule,
     TobiTableModule,
-    SharedModule
+    TobiFormModule
   ],
   declarations: [
     AdministrationComponent,
     AdminProductComponent,
-    AdminProductCategoryComponent
+    EditAdminProductComponent,
+    AdminProductCategoryComponent,
   ],
   exports: [
     AdministrationRoutingModule

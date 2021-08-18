@@ -1,39 +1,17 @@
 .tobi-table {
   border-collapse: separate;
   border-spacing: 0 15px;
+  font-size: 22px;
 
-  tr:first-child > th {
+   th {
     vertical-align: bottom;
-  }
-
-  tr > td:nth-child(-n+3) {
-    background-color: #F5F5F5;
-    vertical-align: middle;
-    border-top: 1px solid var(--main-color);
-    border-bottom: 1px solid var(--main-color);
-  }
-
-  tr > td:first-child {
-    border-left: 1px solid var(--main-color);
-    border-radius: 5px 0 0 5px;
-  }
-
-  tr > td:nth-child(3) {
-    border-right: 1px solid var(--main-color);
-    border-radius: 0 5px 5px 0;
-  }
-
-  tr > td:nth-last-child(-n+2) {
-    padding: 0 15px 0 15px !important;
-  }
-
-  tr:hover > td:nth-child(-n+3){
-    background-color: rgba(0, 0, 0, 0.075);
-  }
-
-  th {
+    padding-bottom: 0;
     font-weight: bold !important;
   }
 }
 
+.table-loading {
+  background: var(--main-bg-loading);
+  height: 400px;
+}
 
