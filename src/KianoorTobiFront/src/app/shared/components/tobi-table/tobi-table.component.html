@@ -2,27 +2,23 @@
   <thead>
   <tr>
     <th *ngFor="let headItem of headers" scope="col">{{headItem.headerName}}</th>
+    <ng-container *ngIf="!viewOnly">
+      <th *ngIf="hasEditButton"></th>
+    <th *ngIf="hasDeleteButton"></th>
+  </ng-container>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let element of source">
     <td *ngFor="let headField of headers">
-      {{element[headField.field]}}
+      <ng-container *ngIf="headField.cellRenderer">
+        <div TobiTableCellRenderer [rowData]='element' [colData]='headField'></div>
+      </ng-container>
+      <ng-container *ngIf="!headField.cellRenderer">
+        {{element[headField.field]}}
+      </ng-container>
     </td>
-    <ng-container *ngIf="!viewOnly">
-      <td>
-      <button id="EditBtn" type="button" class="edit-btn" *ngIf="hasEditButton"
-              (click)="selectedRow=element; selectedRowChange.emit(selectedRow); onEdit.emit(selectedRow);">
-        <span>{{'Edit'}}</span>
-      </button>
-    </td>
-    <td>
-      <button id="RejectBtn" type="button" class="delete-btn" *ngIf="hasDeleteButton"
-              (click)="selectedRow=element; selectedRowChange.emit(selectedRow); onDelete.emit(selectedRow);">
-        <span>{{'Delete'}}</span>
-      </button>
-    </td>
-  </ng-container>
+    <ng-container *ngTemplateOutlet="actionRef, context: {$implicit: element}"></ng-container>
   </tr>
   </tbody>
 </table>
@@ -36,3 +32,20 @@
     <option *ngFor="let page of pageSizeOptions" [value]="page">{{page}} items per page</option>
   </select>
 </div>
+
+<ng-template #actionRef let-element>
+  <ng-container *ngIf="!viewOnly">
+    <td>
+      <button id="EditBtn" type="button" class="edit-btn" *ngIf="hasEditButton"
+              (click)="selectedRow=element; selectedRowChange.emit(selectedRow); onEdit.emit(selectedRow);">
+        <span>{{'Edit'}}</span>
+      </button>
+    </td>
+    <td>
+      <button id="RejectBtn" type="button" class="delete-btn" *ngIf="hasDeleteButton"
+              (click)="selectedRow=element; selectedRowChange.emit(selectedRow); onDelete.emit(selectedRow);">
+        <span>{{'Delete'}}</span>
+      </button>
+    </td>
+  </ng-container>
+</ng-template>

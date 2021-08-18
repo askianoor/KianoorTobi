@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { DEFAULT_CURRENCY_CODE, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -9,6 +9,8 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { NgxLoadingXModule } from 'ngx-loading-x';
 import { AppConsts } from './shared/app-consts';
 import { HttpClientModule } from '@angular/common/http';
+import { CurrencyPipe } from '@angular/common';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -21,12 +23,13 @@ import { HttpClientModule } from '@angular/common/http';
     NgbModule,
     HttpClientModule,
     ServiceProxyModule,
+    SharedModule.forRoot(),
     NgxLoadingXModule.forRoot(AppConsts.ngxLoadingXConfig),
   ],
   exports: [
-    NavbarComponent
+    NavbarComponent,
   ],
-  providers: [],
+  providers: [{provide: DEFAULT_CURRENCY_CODE, useValue: 'USD'}, CurrencyPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

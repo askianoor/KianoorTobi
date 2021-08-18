@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TobiTableComponent } from './tobi-table.component';
+import { TobiTableCellRenderer, TobiTableComponent } from './tobi-table.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 
@@ -8,11 +8,14 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     NgbModule,
-    FormsModule
+    FormsModule,
   ],
   exports: [
     TobiTableComponent
   ],
-  declarations: [TobiTableComponent]
+  declarations: [
+    TobiTableComponent,
+    TobiTableCellRenderer
+  ]
 })
 export class TobiTableModule { }

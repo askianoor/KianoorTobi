@@ -1,4 +1,4 @@
-import { ProductType } from "../enums/Product-type.enum";
+import { ProductType } from "../enums/product-type.enum";
 
 export abstract class Product {
   name! :string

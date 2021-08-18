@@ -7,7 +7,7 @@ import { Component, Directive, ElementRef, EventEmitter, Input, OnInit, Output }
 })
 export class TobiTableComponent {
 
-  @Input() headers: any = [];
+  @Input() headers: TobiTableColumn[] = [];
   @Input() source: any = [];
   @Input() selectedRow: any = {};
 
