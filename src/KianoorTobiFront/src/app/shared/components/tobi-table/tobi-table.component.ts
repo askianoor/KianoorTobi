@@ -1,4 +1,4 @@
-import { Component, Directive, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Directive, ElementRef, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'tobi-table',
@@ -26,7 +26,6 @@ export class TobiTableComponent {
   @Output() onEdit = new EventEmitter<any>();
   @Output() onDelete = new EventEmitter<any>();
   @Output() onSearch = new EventEmitter<any>();
-  @Output() selectedRowChange = new EventEmitter<any>();
 
   @Output() onPageChange = new EventEmitter<any>();
   @Output() pageNumberChange = new EventEmitter<number>();

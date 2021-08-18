@@ -3,12 +3,13 @@
 
 :root {
   --main-color: #17103E;
-  --main-btn-color: #18B876;
+  --main-btn-text-color: #fff;
+  --main-btn-bg-color: #18B876;
   // --main-bg: #eef2f4 url('/assets/images/pattern-grey.svg') 0 0 repeat !important;
 }
 
 * {
-  font-size: 18px;
+  font-size: 22px;
   box-sizing: border-box;
   text-align: left;
   font-family: Helvetica, Arial,  sans-serif; //"Helvetica Neue" is not rendering well !
@@ -34,4 +35,39 @@ nav {
   // background: transparent url('./assets/Logo/Tobii_Dynavox_Logo_White.png') 0% 0% no-repeat padding-box;
 }
 
+.tobi-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid var(--main-color) !important;
+  border-radius: 5px;
+  width: 114px;
+  height: 70px;
+  background-color: var(--main-btn-bg-color);
+
+  span {
+    color: var(--main-btn-text-color);
+    font-weight: bold;
+  }
+}
+
+.edit-btn > span:after {
+  content: "";
+  background-image: url('./assets/Icons/Icons_Edit.svg');
+  background-size: 20px 20px;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+}
+
+.delete-btn > span:after {
+  content: "";
+  background-image: url('./assets/Icons/Icons_Delete.svg');
+  background-size: 20px 20px;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+}
 

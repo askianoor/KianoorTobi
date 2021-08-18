@@ -1,21 +1,18 @@
-<table class="table table-striped">
+<table class="table table-borderless tobi-table">
   <thead>
   <tr>
     <th *ngFor="let headItem of headers" scope="col">{{headItem.headerName}}</th>
     <ng-container *ngIf="!viewOnly">
       <th *ngIf="hasEditButton"></th>
-    <th *ngIf="hasDeleteButton"></th>
+      <th *ngIf="hasDeleteButton"></th>
   </ng-container>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let element of source">
     <td *ngFor="let headField of headers">
-      <ng-container *ngIf="headField.cellRenderer">
+      <ng-container>
         <div TobiTableCellRenderer [rowData]='element' [colData]='headField'></div>
-      </ng-container>
-      <ng-container *ngIf="!headField.cellRenderer">
-        {{element[headField.field]}}
       </ng-container>
     </td>
     <ng-container *ngTemplateOutlet="actionRef, context: {$implicit: element}"></ng-container>
@@ -36,14 +33,14 @@
 <ng-template #actionRef let-element>
   <ng-container *ngIf="!viewOnly">
     <td>
-      <button id="EditBtn" type="button" class="edit-btn" *ngIf="hasEditButton"
-              (click)="selectedRow=element; selectedRowChange.emit(selectedRow); onEdit.emit(selectedRow);">
+      <button id="EditBtn" type="button" class="tobi-btn edit-btn" *ngIf="hasEditButton"
+              (click)="selectedRow=element; onEdit.emit(selectedRow);">
         <span>{{'Edit'}}</span>
       </button>
     </td>
     <td>
-      <button id="RejectBtn" type="button" class="delete-btn" *ngIf="hasDeleteButton"
-              (click)="selectedRow=element; selectedRowChange.emit(selectedRow); onDelete.emit(selectedRow);">
+      <button id="DeleteBtn" type="button" class="tobi-btn delete-btn" *ngIf="hasDeleteButton"
+              (click)="selectedRow=element; onDelete.emit(selectedRow);">
         <span>{{'Delete'}}</span>
       </button>
     </td>
