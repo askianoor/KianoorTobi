@@ -13,6 +13,7 @@ const {app, BrowserWindow} = require('electron')
         }
       })
 
+      //TODO: Fix Electron Issues
       mainWindow.loadURL(
         url.format({
           pathname: path.join(__dirname, `/dist/kianoorTobiFront/index.html`),
@@ -20,8 +21,6 @@ const {app, BrowserWindow} = require('electron')
           slashes: true
         })
       );
-      // Open the DevTools.
-      mainWindow.webContents.openDevTools()
 
       mainWindow.on('closed', function () {
         mainWindow = null
