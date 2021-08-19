@@ -13,12 +13,12 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-  public addProduct(productDto: ProductAddDto) {
-      return this.http.post(this.baseProductsUrl, productDto);
+  public addProduct(productDto: ProductAddDto): Observable<ProductOutputDto> {
+      return this.http.post<ProductOutputDto>(this.baseProductsUrl, productDto);
   }
 
-  public updateProduct(productDto: ProductEditDto) {
-      return this.http.put(this.baseProductsUrl, productDto);
+  public updateProduct(productDto: ProductEditDto): Observable<ProductOutputDto>  {
+      return this.http.put<ProductOutputDto>(this.baseProductsUrl, productDto);
   }
 
   public deleteProduct(id: number) {

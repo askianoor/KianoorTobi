@@ -32,7 +32,7 @@ export class TobiFormComponent implements AfterViewInit {
   @Input() disabled = false;
   @Input() isNew = true;
   @Input() loading = true;
-  @Input() saving = false;
+  @Input() saving: boolean | null = false;
   @Input() newText = '';
   @Input() editText = '';
   @Output() onSave = new EventEmitter<boolean>();

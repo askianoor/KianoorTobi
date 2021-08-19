@@ -10,6 +10,10 @@ import { TobiFormModule } from '../shared/components/tobi-form/tobi-form.module'
 import { EditAdminProductComponent } from './admin-product/edit-admin-product/edit-admin-product.component';
 import { EditAdminProductCategoryComponent } from './admin-product-category/edit-admin-product-category/edit-admin-product-category.component';
 import { FormsModule } from '@angular/forms';
+import { productReducer } from '../shared/stores/reducers/product.reducer';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { ProductEffects } from '../shared/stores/effects/product.effects';
 
 @NgModule({
   imports: [
@@ -18,7 +22,9 @@ import { FormsModule } from '@angular/forms';
     SharedModule,
     TobiTableModule,
     FormsModule,
-    TobiFormModule
+    TobiFormModule,
+    StoreModule.forFeature('appState', [productReducer]),
+    EffectsModule.forFeature([ProductEffects])
   ],
   declarations: [
     AdministrationComponent,

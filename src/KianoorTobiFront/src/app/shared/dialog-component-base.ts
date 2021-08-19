@@ -3,18 +3,10 @@ import {Directive, InjectionToken, Injector, OnInit, Optional} from '@angular/co
 import { ActivatedRoute } from '@angular/router';
 import { NgxSidePanelsService } from 'ngx-side-panels';
 import { ComponentBase } from './component-base';
-
 @Directive({})
 export abstract class DialogComponentBase<TOutput, TCreate, TUpdate> extends ComponentBase implements OnInit {
 
   sidePanelService!: NgxSidePanelsService;
-
-  protected constructor(private injector: Injector) {
-    super(injector);
-    this.data = injector.get(ActivatedRoute).snapshot.data;
-    this.sidePanelService = injector.get(NgxSidePanelsService);
-  }
-
   public data!: any;
   isEditMode = false;
   id!: number;
@@ -26,6 +18,12 @@ export abstract class DialogComponentBase<TOutput, TCreate, TUpdate> extends Com
   loading = true;
   saving = false;
   isEditBeforeSave = false;
+
+  protected constructor(private injector: Injector) {
+    super(injector);
+    this.data = injector.get(ActivatedRoute).snapshot.data;
+    this.sidePanelService = injector.get(NgxSidePanelsService);
+  }
 
   protected abstract populateOnAdd(finishedCallback: Function): void;
 

@@ -14,7 +14,9 @@ import { SharedModule } from './shared/shared.module';
 import { NgxSidePanelsModule } from 'ngx-side-panels';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
+import { EffectsModule, USER_PROVIDED_EFFECTS } from '@ngrx/effects';
+import { ProductEffects } from './shared/stores/effects/product.effects';
+import { productReducer } from './shared/stores/reducers/product.reducer';
 
 @NgModule({
   declarations: [
@@ -32,8 +34,10 @@ import { EffectsModule } from '@ngrx/effects';
     SharedModule.forRoot(),
     NgxLoadingXModule.forRoot(AppConsts.ngxLoadingXConfig),
     NgxSidePanelsModule.forRoot(),
-    StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([]),
+    StoreModule.forRoot({
+      product: productReducer
+    }, {}),
+    EffectsModule.forRoot([ProductEffects]),
   ],
   exports: [
     NavbarComponent,
@@ -41,7 +45,13 @@ import { EffectsModule } from '@ngrx/effects';
   providers: [
     {provide: DEFAULT_CURRENCY_CODE, useValue: 'USD'},
     CurrencyPipe,
-    NgbActiveModal
+    NgbActiveModal,
+    ProductEffects,
+    {
+      provide: USER_PROVIDED_EFFECTS,
+      multi: true,
+      useValue: [ProductEffects],
+    },
   ],
   bootstrap: [AppComponent]
 })

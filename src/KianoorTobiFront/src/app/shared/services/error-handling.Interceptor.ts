@@ -12,13 +12,10 @@ export class ErrorHandling implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       catchError((error: any) => {
-        console.dir(error);
         if(typeof(error.error)!= 'string')
         {
-          console.dir(error.error);
           var messages = '';
           for (const key of Object.keys(error.error)) {
-
             const temp = error.error[key];
             if(typeof(temp)== 'string') {
               messages += temp + "\n";

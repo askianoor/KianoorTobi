@@ -8,6 +8,12 @@ import { MoneyPipe } from 'src/app/shared/pipes/money.pipe';
 import { NgxSidePanelsService } from 'ngx-side-panels';
 import { EditAdminProductComponent } from './edit-admin-product/edit-admin-product.component';
 import { SweetAlertResult } from 'sweetalert2';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { AppState } from 'src/app/shared/stores/app-state';
+import { map } from 'rxjs/operators';
+import { LoadProducts } from 'src/app/shared/stores/actions/product.action';
+
 @Component({
   selector: 'app-admin-product',
   templateUrl: './admin-product.component.html',
@@ -15,16 +21,20 @@ import { SweetAlertResult } from 'sweetalert2';
   encapsulation: ViewEncapsulation.None
 })
 export class AdminProductComponent extends TableComponentBase<ProductOutputDto> {
-
+  products$: Observable<ProductOutputDto[]>;
   constructor(
     protected injector: Injector,
     public productService: ProductService,
     private moneyPipe :MoneyPipe,
-    private sidePanelService: NgxSidePanelsService
+    private sidePanelService: NgxSidePanelsService,
+    private store: Store
     ) {
     super(injector);
-  }
+    this.products$ = this.store.pipe(select((app: any) => app.product), map(state => state.products));
+    this.isTableLoading$ = this.store.pipe(select((app: any) => app.product), map(state => state.loading));
 
+  }
+  isTableLoading$: Observable<boolean>;
   selectedRow!: ProductOutputDto;
   hasPaging = false;
 
@@ -58,16 +68,16 @@ export class AdminProductComponent extends TableComponentBase<ProductOutputDto> 
   ];
 
   protected list(finishedCallback: Function): void {
-    this.productService.getProducts().subscribe(result => {
-      finishedCallback(result);
-    });
+    // this.productService.getProducts().subscribe(result => {
+    //   finishedCallback(result);
+    // });
+    this.store.dispatch(LoadProducts());
   }
 
   onAdd(): void {
     this.sidePanelService.openPanel(EditAdminProductComponent, {
       routePath: `administration/product/editProduct`,
       skipLocationChange: true,
-      afterClose: () => {this.refresh();}
     });
   }
 
@@ -75,8 +85,7 @@ export class AdminProductComponent extends TableComponentBase<ProductOutputDto> 
     this.sidePanelService.openPanel(EditAdminProductComponent, {
       data: {...selectedProduct},
       routePath: `administration/product/editProduct`,
-      skipLocationChange: true,
-      afterClose: () => {this.refresh();}
+      skipLocationChange: true
     });
   }
 

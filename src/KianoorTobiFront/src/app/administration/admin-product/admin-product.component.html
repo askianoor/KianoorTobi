@@ -6,11 +6,11 @@
 [hasAddButton]="true"
 [hasPaging]="hasPaging"
 [headers]='headers'
-[source]='source'
+[source]='products$ |async'
 [(pageNumber)]='pageNumber'
 (onAdd)="onAdd()"
 (onEdit)="onEdit($event)"
 (onDelete)="onDelete($event)"
-[isTableLoading]='isTableLoading'
+[isTableLoading]='isTableLoading$ | async'
 >
 </tobi-table>

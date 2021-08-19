@@ -11,7 +11,7 @@ export class TobiTableComponent {
   @Input() source: any = [];
   @Input() selectedRow: any = {};
 
-  @Input() isTableLoading = true;
+  @Input() isTableLoading: boolean | null = true;
   @Input() viewOnly = false;
   @Input() hasPaging = true;
   @Input() pageNumber = 1;

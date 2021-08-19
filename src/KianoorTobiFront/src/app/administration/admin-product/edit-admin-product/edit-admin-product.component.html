@@ -1,6 +1,6 @@
 <tobi-form
   #tobiForm="tobiForm"
-  [isNew]="!id" [saving]="saving" [loading]="loading"
+  [isNew]="!id" [saving]="saving$ | async" [loading]="loading"
   [editText]="'Edit Product'"
   [newText]="'Create Product'" (onSave)="onSave()">
 
@@ -14,9 +14,13 @@
 
   <div class="form-group">
     <label for="productType">Type</label>
-    <select class="form-control" id="productType" [required]="true" [(ngModel)]="itemModel.type" (ngModelChange)="productTypeChanged($event)" >
-      <option [value]="null" disabled>Select Type</option>
-      <option *ngFor="let item of productType | enumToArray" [value]="item.index" [disabled]="item.index == itemModel.type">{{item.name}}</option>
+    <select class="form-control" id="productType"
+    [compareWith]="compareWithFn"
+    [required]="true" [(ngModel)]="itemModel.type" (ngModelChange)="productTypeChanged($event)" >
+      <option [ngValue]="null" disabled>Select Type</option>
+      <option
+      [attr.selected]="itemModel.type == item.index"
+      *ngFor="let item of productType | enumToArray" [ngValue]="item.index" [disabled]="itemModel.type == item.index" >{{item.name}}</option>
     </select>
   </div>
 
