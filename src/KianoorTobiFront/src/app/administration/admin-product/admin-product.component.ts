@@ -6,7 +6,6 @@ import { ProductService } from 'src/app/shared/services/product.service';
 import { PagedResultDto, TableComponentBase } from 'src/app/shared/table-component-base';
 import { MoneyPipe } from 'src/app/shared/pipes/money.pipe';
 import { NgxSidePanelsService } from 'ngx-side-panels';
-import { AdminProductCategoryComponent } from '../admin-product-category/admin-product-category.component';
 import { EditAdminProductComponent } from './edit-admin-product/edit-admin-product.component';
 import { SweetAlertResult } from 'sweetalert2';
 @Component({
@@ -67,26 +66,27 @@ export class AdminProductComponent extends TableComponentBase<ProductOutputDto> 
   onAdd(): void {
     this.sidePanelService.openPanel(EditAdminProductComponent, {
       routePath: `administration/product/editProduct`,
-      skipLocationChange: true
+      skipLocationChange: true,
+      afterClose: () => {this.refresh();}
     });
   }
 
   onEdit(selectedProduct: any): void {
-    debugger
     this.sidePanelService.openPanel(EditAdminProductComponent, {
-      data: {selectedProduct},
+      data: {...selectedProduct},
       routePath: `administration/product/editProduct`,
-      skipLocationChange: true
+      skipLocationChange: true,
+      afterClose: () => {this.refresh();}
     });
   }
 
   onDelete(selectedProduct: any): void {
     this.SwalWithBootstrapButtons.fire({
-      title: `Are you sure want to delete "${selectedProduct.name}" ?`,
+      text: `Are you sure want to delete "${selectedProduct.name}" ?`,
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Delete',
-      cancelButtonText: 'Cancel',
+      confirmButtonText: '<span>Delete</span>',
+      cancelButtonText: '<span>Cancel</span>',
     }).then((result: SweetAlertResult) => {
       if (result.isConfirmed) {
         this.productService.deleteProduct(selectedProduct.id).subscribe(() => {

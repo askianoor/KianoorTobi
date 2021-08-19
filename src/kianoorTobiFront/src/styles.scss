@@ -5,6 +5,7 @@
   --main-color: #17103E;
   --main-btn-text-color: #fff;
   --main-btn-bg-color: #18B876;
+  --main-input-color: #ECF0EE;
   --main-bg-loading: #eef2f4 url('./assets/Icons/Icons_Loading.svg') 50% 50% no-repeat !important;
 }
 
@@ -15,6 +16,24 @@
   letter-spacing: 0px;
   color: var(--main-color);
   font-weight: normal;
+  font-size: 22px;
+}
+
+input, select {
+  background-color: var(--main-input-color) !important;
+}
+
+.disabled-input, option:disabled {
+  background-color: #e2e2e2 !important;
+  opacity: 0.3;
+}
+
+select {
+   //Remove original arrows
+   -webkit-appearance: none;
+   //Use png at assets/selectArrow.png for the arrow on the right
+   background: url(./assets/Icons/Icons_Arrow.svg) no-repeat 99% var(--main-btn-bg-color);
+   background-size: 22px;
 }
 
 nav {
@@ -76,14 +95,34 @@ nav {
   background-image: url('./assets/Icons/Icons_Delete.svg');
 }
 
-.cancel-btn {
-  background-color: #F8FBFA;
-  color: var(--main-color);
-  background-image: url('./assets/Icons/Icons_Cancel.svg');
-  fill: var(--main-color);
+.save-btn > span:after {
+  background-image: url('./assets/Icons/Icons_Save.svg');
 }
 
+.cancel-btn {
+  background-color: #F8FBFA;
+
+  > span {
+    color: var(--main-color);
+  }
+
+  > span:after {
+    background-image: url('./assets/Icons/Icons_Cancel.svg');
+    fill: var(--main-color);
+  }
+}
+
+.tobi-disable-btn {
+  border-color: #707070;
+  opacity: 0.25;
+}
+
+.tobi-dialog-btn {
+  width: 120px;
+}
 
 .swal2-actions {
   justify-content: space-around !important;
 }
+
+

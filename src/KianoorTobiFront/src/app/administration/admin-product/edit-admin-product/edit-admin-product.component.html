@@ -4,12 +4,49 @@
   [editText]="'Edit Product'"
   [newText]="'Create Product'" (onSave)="onSave()">
 
-  <div>
-    <ng-container *ngIf="!id">
-      {{id}}
-    </ng-container>
+  <div class="form-group">
+    <label for="productName">Name</label>
+      <input name="productName" #name="ngModel" type="text" [required]="true" [(ngModel)]="itemModel.name" class="form-control"
+      [ngClass]="{'is-invalid': name.invalid && name.touched}"
+      placeholder="Product">
+      <div class="invalid-feedback" *ngIf="name.invalid && name.touched">Please inform the product name.</div>
+  </div>
+
+  <div class="form-group">
+    <label for="productType">Type</label>
+    <select class="form-control" id="productType" [required]="true" [(ngModel)]="itemModel.type" (ngModelChange)="productTypeChanged($event)" >
+      <option [value]="null" disabled>Select Type</option>
+      <option *ngFor="let item of productType | enumToArray" [value]="item.index" [disabled]="item.index == itemModel.type">{{item.name}}</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="productPrice">Price</label>
+      <input name="productPrice" #price="ngModel" type="number" [required]="true" [disabled]="isPriceDisabled" [class.disabled-input]="isPriceDisabled"
+      tobiMoneyValidator
+      min="{{(itemModel.type == productType.Peripheral ? 0 : 1000)}}"
+      max="{{(itemModel.type == productType.Peripheral  ? undefined : 2600)}}"
+      [(ngModel)]="itemModel.price" class="form-control"
+      [ngClass]="{'is-invalid': price.invalid && price.touched}"
+      placeholder="Price">
+      <small *ngIf="price.valid">{{itemModel.price | currency}}</small>
+      <div class="invalid-feedback" *ngIf="price.invalid && price.touched">
+        Please inform the correct product price! <br/>
+        <ng-container *ngIf="itemModel.type == productType.Peripheral">
+          The price of the peripheral products may be any positive, non-zero value.
+        </ng-container>
+        <ng-container *ngIf="itemModel.type == productType.Integrated">
+          The price of the integrated products may be anywhere within the range of 1000 to 2600 dollars.
+        </ng-container>
+      </div>
+  </div>
+
+  <div class="form-group">
+    <label for="productCategory">Category</label>
+    <select class="form-control" id="productCategory" [required]="true" [(ngModel)]="itemModel.productCategoryId" >
+      <option [value]="null" disabled>Select Category</option>
+      <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+    </select>
   </div>
 
 </tobi-form>
-
-teststste

@@ -5,15 +5,15 @@ export abstract class ComponentBase {
 
   public SwalWithBootstrapButtons = Swal.mixin({
     customClass: {
-      confirmButton: 'tobi-btn delete-btn mx-2',
-      cancelButton: 'tobi-btn cancel-btn mx-2'
+      confirmButton: 'tobi-btn delete-btn tobi-dialog-btn mx-2',
+      cancelButton: 'tobi-btn cancel-btn tobi-dialog-btn mx-2'
     },
     buttonsStyling: false,
   });
 
   public Toast = Swal.mixin({
     toast: true,
-    position: 'top-right',
+    position: 'top-end',
     showConfirmButton: false,
     timer: 3000,
     timerProgressBar: true,

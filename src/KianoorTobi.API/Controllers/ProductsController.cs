@@ -57,20 +57,20 @@ namespace KianoorTobi.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(ProductAddDto productDto)
+        public async Task<IActionResult> Add([FromBody] ProductAddDto productDto)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
             var product = _mapper.Map<Product>(productDto);
             var productResult = await _productService.Add(product);
 
-            if (productResult == null) return BadRequest(ModelState);
+            if (productResult == null) return BadRequest("Duplicate Name is exist!");
 
             return Ok(_mapper.Map<ProductOutputDto>(productResult));
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update(ProductEditDto productDto)
+        public async Task<IActionResult> Update([FromBody] ProductEditDto productDto)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 

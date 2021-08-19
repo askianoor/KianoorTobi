@@ -11,8 +11,6 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import {FormArray, NgForm, NgModel} from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-
 @Component({
   selector: 'tobi-form',
   templateUrl: './tobi-form.component.html',
@@ -39,7 +37,7 @@ export class TobiFormComponent implements AfterViewInit {
   @Input() editText = '';
   @Output() onSave = new EventEmitter<boolean>();
 
-  constructor(private activeModal: NgbActiveModal) { }
+  constructor() { }
 
   ngAfterViewInit(): void {
     // This is needed because when <input>s get transcluded into the form via ng-content,
@@ -67,18 +65,6 @@ export class TobiFormComponent implements AfterViewInit {
   inputChangeStatus(ngform: NgForm, checkControlName: any): any {
     ngform.form?.controls[checkControlName]?.markAsTouched();
     ngform.form?.controls[checkControlName]?.updateValueAndValidity()
-  }
-
-  public decline() {
-    this.activeModal.close(false);
-  }
-
-  public accept() {
-    this.activeModal.close(true);
-  }
-
-  public dismiss() {
-    this.activeModal.dismiss();
   }
 }
 

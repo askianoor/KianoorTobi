@@ -10,6 +10,10 @@ namespace KianoorTobi.API.Validators.Product
         {
             RuleFor(x => x.Name).NotEmpty().Length(2, 150);
 
+            RuleFor(x => x.Type).NotNull();
+
+            RuleFor(x => x.ProductCategoryId).NotNull();
+
             RuleFor(x => x.Price).InclusiveBetween(1000, 2600)
                 .When(x => x.Type == ProductType.Integrated);
 

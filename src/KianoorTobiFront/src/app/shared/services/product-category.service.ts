@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment';
-import { ProductCategory } from '../models/product-category';
+import { ProductCategory, ProductCategoryAddDto, ProductCategoryEditDto, ProductCategoryOutputDto } from '../models/product-category';
 
 @Injectable({
   providedIn: 'root'
@@ -13,28 +13,28 @@ export class ProductCategoryService {
 
   constructor(private http: HttpClient) { }
 
-  public addProductCategory(productcategory: ProductCategory) {
+  public addProductCategory(productcategory: ProductCategoryAddDto) {
       return this.http.post(this.baseProductCategoriesUrl, productcategory);
   }
 
-  public updateProductCategory(productcategory: ProductCategory) {
+  public updateProductCategory(productcategory: ProductCategoryEditDto) {
       return this.http.put(this.baseProductCategoriesUrl, productcategory);
   }
 
-  public getProductCategories(): Observable<ProductCategory[]> {
-      return this.http.get<ProductCategory[]>(this.baseProductCategoriesUrl);
+  public getProductCategories(): Observable<ProductCategoryOutputDto[]> {
+      return this.http.get<ProductCategoryOutputDto[]>(this.baseProductCategoriesUrl);
   }
 
   public deleteProductCategory(id: number) {
       return this.http.delete(this.baseProductCategoriesUrl + id);
   }
 
-  public getProductCategoryById(id: number): Observable<ProductCategory> {
-      return this.http.get<ProductCategory>(this.baseProductCategoriesUrl + id);
+  public getProductCategoryById(id: number): Observable<ProductCategoryOutputDto> {
+      return this.http.get<ProductCategoryOutputDto>(this.baseProductCategoriesUrl + id);
   }
 
-  public getProductCategoryBySearch(name: string): Observable<ProductCategory[]> {
-      return this.http.get<ProductCategory[]>(`${this.baseProductCategoriesUrl}search/${name}`);
+  public getProductCategoryBySearch(name: string): Observable<ProductCategoryOutputDto[]> {
+      return this.http.get<ProductCategoryOutputDto[]>(`${this.baseProductCategoriesUrl}search/${name}`);
   }
 
 }

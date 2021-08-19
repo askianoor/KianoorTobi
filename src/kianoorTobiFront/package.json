@@ -21,6 +21,8 @@
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
     "@ng-bootstrap/ng-bootstrap": "^10.0.0",
+    "@ngrx/effects": "^12.4.0",
+    "@ngrx/store": "^12.4.0",
     "bootstrap": "^4.5.0",
     "natural-orderby": "^2.0.3",
     "ngx-loading-x": "^1.0.3",

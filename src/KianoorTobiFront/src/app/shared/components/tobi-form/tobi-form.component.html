@@ -1,37 +1,40 @@
-<div class="modal-header">
-  <h4 class="modal-title" id="modal-title">
-    <div *ngIf="isNew">
-      <h2 class="tobi-form-title">
-        {{newText}}
-      </h2>
-    </div>
-    <div *ngIf="!isNew">
-      <h2 class="tobi-form-title">
-        {{editText}}
-      </h2>
-    </div>
-  </h4>
-  <button type="button" class="close" aria-describedby="modal-title" (click)="dismiss()">
-      <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<div class="modal-body" [class.tobi-form-loading]="loading">
-  <form #myForm="ngForm" fxLayoutAlign="center" fxLayout="column" autocomplete="off" action="">
-    <ng-container>
-      <ng-content></ng-content>
-    </ng-container>
-  </form>
-</div>
-<div class="modal-footer">
-  <button type="button" *ngIf="hasCancelBtn" [disabled]="saving" (click)="dismiss()">{{ cancelBtnText }}</button>
+<div class="tobi-modal">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-title">
+      <div *ngIf="isNew">
+        <h2 class="tobi-form-title">
+          {{newText}}
+        </h2>
+      </div>
+      <div *ngIf="!isNew">
+        <h2 class="tobi-form-title">
+          {{editText}}
+        </h2>
+      </div>
+    </h4>
+  </div>
+  <div class="modal-body" [class.tobi-form-loading]="loading">
+    <form #myForm="ngForm" fxLayoutAlign="center" fxLayout="column" autocomplete="off" action="">
+      <ng-container>
+        <ng-content></ng-content>
+      </ng-container>
+    </form>
+  </div>
+  <div class="modal-footer">
 
-  <button id="SaveBtn" *ngIf="hasSaveBtn" [disabled]="myForm.invalid || saving|| disabled" class="action-btn save-btn"
-      (click)="onSave.emit(false);" color="primary" cdkFocusInitial>
-    <span [style.visibility]="(!saving)? '': 'hidden'">
-      {{saveBtnTxt}}
-    </span>
-    <div class="save-btn-loading">
-      <div *ngIf="saving" color="accent"></div>
-    </div>
-  </button>
+    <button id="SaveBtn" *ngIf="hasSaveBtn" [disabled]="myForm.invalid || saving|| disabled"
+          class="tobi-btn save-btn" [class.tobi-disable-btn]="myForm.invalid || saving|| disabled"
+        (click)="onSave.emit(false);">
+      <span [style.visibility]="(!saving)? '': 'hidden'">
+        {{saveBtnTxt}}
+      </span>
+      <div class="save-btn-loading">
+        <div *ngIf="saving"></div>
+      </div>
+    </button>
+
+    <button type="button" class="tobi-btn cancel-btn" *ngIf="hasCancelBtn" [disabled]="saving" appCloseSidePanel>
+      <span>{{ cancelBtnText }}</span>
+    </button>
+  </div>
 </div>

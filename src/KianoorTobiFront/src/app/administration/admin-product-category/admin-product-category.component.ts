@@ -5,6 +5,7 @@ import { ProductCategoryOutputDto } from 'src/app/shared/models/product-category
 import { ProductCategoryService } from 'src/app/shared/services/product-category.service';
 import { TableComponentBase } from 'src/app/shared/table-component-base';
 import { SweetAlertResult } from 'sweetalert2';
+import { EditAdminProductCategoryComponent } from './edit-admin-product-category/edit-admin-product-category.component';
 
 @Component({
   selector: 'app-admin-product-category',
@@ -40,21 +41,27 @@ export class AdminProductCategoryComponent extends TableComponentBase<ProductCat
   }
 
   onAdd(): void {
-
+    this.sidePanelService.openPanel(EditAdminProductCategoryComponent, {
+      routePath: `administration/product/editProduct`,
+      skipLocationChange: true
+    });
   }
 
   onEdit(selectedProductCategory: any): void {
-    console.dir(selectedProductCategory);
+    this.sidePanelService.openPanel(EditAdminProductCategoryComponent, {
+      data: {...selectedProductCategory},
+      routePath: `administration/product/editProduct`,
+      skipLocationChange: true
+    });
   }
 
   onDelete(selectedProductCategory: any): void {
-    console.dir(selectedProductCategory);
     this.SwalWithBootstrapButtons.fire({
-      title: `Are you sure want to delete "${selectedProductCategory.name}" ?`,
+      text: `Are you sure want to delete "${selectedProductCategory.name}" ?`,
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Delete',
-      cancelButtonText: 'Cancel',
+      confirmButtonText: '<span>Delete</span>',
+      cancelButtonText: '<span>Cancel</span>',
     }).then((result: SweetAlertResult) => {
       if (result.isConfirmed) {
         this.productCategoryService.deleteProductCategory(selectedProductCategory.id).subscribe(() => {

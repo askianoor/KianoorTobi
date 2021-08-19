@@ -13,7 +13,8 @@ import { CurrencyPipe } from '@angular/common';
 import { SharedModule } from './shared/shared.module';
 import { NgxSidePanelsModule } from 'ngx-side-panels';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ComponentBase } from './shared/component-base';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,8 @@ import { ComponentBase } from './shared/component-base';
     SharedModule.forRoot(),
     NgxLoadingXModule.forRoot(AppConsts.ngxLoadingXConfig),
     NgxSidePanelsModule.forRoot(),
+    StoreModule.forRoot({}, {}),
+    EffectsModule.forRoot([]),
   ],
   exports: [
     NavbarComponent,

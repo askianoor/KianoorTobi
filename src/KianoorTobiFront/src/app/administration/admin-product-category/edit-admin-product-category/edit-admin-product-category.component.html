@@ -1,0 +1,14 @@
+<tobi-form
+  #tobiForm="tobiForm"
+  [isNew]="!id" [saving]="saving" [loading]="loading"
+  [editText]="'Edit Product Category'"
+  [newText]="'Create Product Category'" (onSave)="onSave()">
+
+  <div class="form-group">
+    <label for="productCategoryName">Name</label>
+      <input name="productCategoryName" #name="ngModel" [required]="true" [(ngModel)]="itemModel.name" class="form-control"
+      [ngClass]="{'is-invalid': name.invalid && name.touched}"
+      placeholder="Product Category">
+      <div class="invalid-feedback" *ngIf="name.invalid && name.touched">Please inform the product category name.</div>
+  </div>
+</tobi-form>

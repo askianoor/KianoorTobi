@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using KianoorTobi.API.Dtos.ProductCategory;
@@ -14,12 +15,17 @@ namespace KianoorTobi.API.Controllers
         #region DI & Ctor
 
         private readonly IProductCategoryService _productCategoryService;
+        private readonly IProductService _productService;
         private readonly IMapper _mapper;
 
-        public ProductCategoriesController(IMapper mapper, IProductCategoryService productCategoryService)
+        public ProductCategoriesController(
+            IMapper mapper, 
+            IProductCategoryService productCategoryService,
+            IProductService productService)
         {
             _mapper = mapper;
             _productCategoryService = productCategoryService;
+            _productService = productService;
         }
 
         #endregion
@@ -45,20 +51,20 @@ namespace KianoorTobi.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(ProductCategoryAddDto productCategoryDto)
+        public async Task<IActionResult> Add([FromBody]ProductCategoryAddDto productCategoryDto)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
             var productCategory = _mapper.Map<ProductCategory>(productCategoryDto);
             var productCategoryResult = await _productCategoryService.Add(productCategory);
 
-            if (productCategoryResult == null) return BadRequest(ModelState);
+            if (productCategoryResult == null) return BadRequest("Duplicate Name is exist!");
 
             return Ok(_mapper.Map<ProductCategoryOutputDto>(productCategoryResult));
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update(ProductCategoryEditDto productCategoryDto)
+        public async Task<IActionResult> Update([FromBody]ProductCategoryEditDto productCategoryDto)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
@@ -72,6 +78,13 @@ namespace KianoorTobi.API.Controllers
         {
             var productCategory = await _productCategoryService.GetById(id);
             if (productCategory == null) return NotFound();
+
+            var checkForProducts =await _productService.GetProductsByCategory(productCategory.Id);
+
+            if (checkForProducts.Any())
+            {
+                return BadRequest("You can't delete a category with items, please delete the products first");
+            }
 
             var result = await _productCategoryService.Remove(productCategory);
 
@@ -87,7 +100,7 @@ namespace KianoorTobi.API.Controllers
             var categories = _mapper.Map<List<ProductCategory>>(await _productCategoryService.Search(productCategory));
 
             if (categories == null || categories.Count == 0)
-                return NotFound("None product productCategory was founded");
+                return NotFound("None product of this category was founded");
 
             return Ok(categories);
         }

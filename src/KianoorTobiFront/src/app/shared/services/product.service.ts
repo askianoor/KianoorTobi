@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment';
-import { Product } from '../models/product';
+import { Product, ProductAddDto, ProductEditDto, ProductOutputDto } from '../models/product';
 
 @Injectable({
   providedIn: 'root'
@@ -13,28 +13,28 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-  public addProduct(product: Product) {
-      return this.http.post(this.baseProductsUrl, product);
+  public addProduct(productDto: ProductAddDto) {
+      return this.http.post(this.baseProductsUrl, productDto);
   }
 
-  public updateProduct(product: Product) {
-      return this.http.put(this.baseProductsUrl, product);
+  public updateProduct(productDto: ProductEditDto) {
+      return this.http.put(this.baseProductsUrl, productDto);
   }
 
   public deleteProduct(id: number) {
     return this.http.delete(this.baseProductsUrl + id);
   }
 
-  public getProducts(): Observable<Product[]> {
-      return this.http.get<Product[]>(this.baseProductsUrl);
+  public getProducts(): Observable<ProductOutputDto[]> {
+      return this.http.get<ProductOutputDto[]>(this.baseProductsUrl);
   }
 
-  public getProductById(id: number): Observable<Product> {
-      return this.http.get<Product>(this.baseProductsUrl + id);
+  public getProductById(id: number): Observable<ProductOutputDto> {
+      return this.http.get<ProductOutputDto>(this.baseProductsUrl + id);
   }
 
-  public searchProductsWithType(searchedValue: string): Observable<Product[]> {
-      return this.http.get<Product[]>(`${this.baseProductsUrl}products/search-product-with-type/${searchedValue}`);
+  public searchProductsWithType(searchedValue: string): Observable<ProductOutputDto[]> {
+      return this.http.get<ProductOutputDto[]>(`${this.baseProductsUrl}products/search-product-with-type/${searchedValue}`);
   }
 
 }

@@ -6,7 +6,7 @@ namespace KianoorTobi.Domain.Enums
 {
     public enum ProductType
     {
-        Peripheral,
+        Peripheral = 1,
         Integrated
     }
 }
